@@ -11,7 +11,7 @@ const form = document.querySelector("#login-form");
             const options = {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'applications/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(update),
             };
@@ -20,10 +20,19 @@ const form = document.querySelector("#login-form");
 
             async function sendData(options) {
                 try {
-                    const response = await fetch('http://localhost:8080/api/v1/login', options);
+                    const response = await fetch('http://172.20.15.5:8080/api/v1/login', options);
                     console.log(await response.json());
+
+                    if (response.ok) {
+                        window.location.href = './app/index.html';
+                    } else {
+                        alert("Erro ao fazer login.");
+                    }
+
                 } catch (e) {
                     console.error(e);
+                    alert.error(e)
+                    alert("Ocorreu um erro. Tente novamente.")
                 }
             }
         });
